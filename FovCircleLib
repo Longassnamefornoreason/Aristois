@@ -56,6 +56,7 @@ _G.fov_circle.Filled = false
 _G.fov_circle.Visible = false
 _G.fov_circle.Transparency = 1
 _G.fov_circle.Color = FovConfig.Color
+_G.fov_circle.ZIndex = 9999
 
    
 
@@ -68,6 +69,7 @@ _G.outline.Filled = false
 _G.outline.Transparency = 1
 _G.outline.Visible = false
 _G.outline.Color = FovConfig.ColorOutline
+_G.outline.ZIndex = 9999
 
 --Outline Circle Below
 _G.dee = Drawing.new("Circle")
@@ -78,6 +80,7 @@ _G.dee.Filled = false
 _G.dee.Transparency = 1
 _G.dee.Visible = false
 _G.dee.Color = FovConfig.ColorOutline
+_G.dee.ZIndex = 9999
 
 elseif 
     FovConfig.Enabled == false then
