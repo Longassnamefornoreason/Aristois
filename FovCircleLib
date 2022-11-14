@@ -23,6 +23,7 @@ _G.FovConfig = {
     Rainbow = false, -- Dont edit this table an execute the whole script, execute seperately or in a button etc
     Color = Color3.fromRGB(73, 73, 255), -- Colour of main circle / when using color picker do _G.FovConfig.Color = colorpicker idfk i dont use ui libs
     ColorW = Color3.fromRGB(73, 73, 255), 
+    ColorD = Color3.fromRGB(73, 73, 255),
     ColorOutline = Color3.fromRGB(0, 0, 0), -- Colour of the outline of circles
 }
 
