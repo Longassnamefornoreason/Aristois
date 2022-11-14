@@ -66,7 +66,7 @@ _G.outline.Thickness = 2
 _G.outline.NumSides = 100
 -- Check render loop for radius
 _G.outline.Filled = false
-_G.outline.Transparency = 1
+_G.outline.Transparency = _G.fov_circle.Transparency
 _G.outline.Visible = false
 _G.outline.Color = FovConfig.ColorOutline
 _G.outline.ZIndex = 9999
@@ -77,7 +77,7 @@ _G.dee.Thickness = 2
 _G.dee.NumSides = 100
 -- Check render loop for radius
 _G.dee.Filled = false
-_G.dee.Transparency = 1
+_G.dee.Transparency = _G.fov_circle.Transparency
 _G.dee.Visible = false
 _G.dee.Color = FovConfig.ColorOutline
 _G.dee.ZIndex = 9999
@@ -100,12 +100,15 @@ end -- STOP
 -- Start of render loop for posistion / other shit
 
 RunService.RenderStepped:Connect(function(step)
+
  if (_G.fov_circle ~= nil) then _G.fov_circle.Visible = _G.FovConfig.Enabled _G.fov_circle.Position = getMousePosition() + Vector2.new(0, 36) end; -- Vector = offset for circle, learn camera to edit its basically centred
  if (_G.outline ~= nil) then _G.outline.Visible = _G.FovConfig.Enabled _G.outline.Position = getMousePosition() + Vector2.new(0, 36) end;
  if (_G.dee ~= nil) then _G.dee.Visible = _G.FovConfig.Enabled _G.dee.Position = getMousePosition() + Vector2.new(0, 36) end;
  if (_G.FovConfig.Rainbow) then  _G.fov_circle.Color = Color3.fromHSV(tick()%5/5,1,1) else _G.fov_circle.Color = _G.FovConfig.Color end;
 _G.outline.Radius = _G.fov_circle.Radius + 2
 _G.dee.Radius = _G.fov_circle.Radius - 2 
+_G.dee.Transparency = _G.fov_circle.Transparency
+_G.outline.Transparency = _G.fov_circle.Transparency
 
 end)
 
