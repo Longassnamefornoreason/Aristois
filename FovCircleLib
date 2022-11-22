@@ -110,6 +110,8 @@ _G.outline.Radius = _G.fov_circle.Radius + 2
 _G.dee.Radius = _G.fov_circle.Radius - 2 
 _G.dee.Transparency = _G.fov_circle.Transparency
 _G.outline.Transparency = _G.fov_circle.Transparency
+_G.outline.NumSides  = _G.fov_circle.NumSides 
+_G.dee.NumSides = _G.fov_circle.NumSides 
 
 end)
 
