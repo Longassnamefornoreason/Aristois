@@ -1,0 +1,113 @@
+--[[ Info = 
+
+         {Blue's Complete Fov Circle And Shit Library}
+         
+         You can add zindex to circle to keep it on top of uis
+         
+
+]]
+
+Version = "1.0"
+
+print(Version)
+
+_G.wait = 100
+
+
+_G.FovConfig = {
+    Enabled = true, -- On / off
+    Rainbow = false, -- Buggy i recommend just using ur own rainbow inside a colour picker
+    Color = Color3.fromRGB(199, 255, 255), -- Colour of main circle
+    ColorOutline = Color3.fromRGB(0, 0, 0) -- Colour of the outline of circles
+}
+
+local FovConfig = _G.FovConfig;
+
+local SelfConfig = { -- Not all games will allow this and will need to be edited.
+    Fov = false, -- Self explanatory 
+    FovNumber = 120 -- Fov number
+}
+
+
+local mouse = game.Players.LocalPlayer:GetMouse() -- Getting local mouse (needed)
+local Player = game:GetService("Players").LocalPlayer -- Getting self (local)
+local runService = game:service("RunService") -- Leave lol ik defined twice
+
+local function getMousePosition() -- Getting mouse (leave how it is)
+    return Vector2.new(mouse.X, mouse.Y)
+end
+
+local RunService = game:GetService("RunService") -- Runservice local
+
+-- Outline = _G.dee and _G.outline 
+-- fov_circle = main circle
+
+   if FovConfig.Enabled == true then
+_G.fov_circle = Drawing.new("Circle")
+_G.fov_circle.Thickness = 2
+_G.fov_circle.NumSides = 100
+_G.fov_circle.Radius = 100
+_G.fov_circle.Filled = false
+_G.fov_circle.Visible = true
+_G.fov_circle.Transparency = 1
+_G.fov_circle.Color = FovConfig.Color
+
+   
+
+
+_G.outline = Drawing.new("Circle")
+_G.outline.Thickness = 2
+_G.outline.NumSides = 100
+_G.outline.Radius = _G.fov_circle.Radius + 2 -- Will automatically change with main circ radius
+_G.outline.Filled = false
+_G.outline.Transparency = 1
+_G.outline.Visible = true
+_G.outline.Color = FovConfig.ColorOutline
+
+_G.dee = Drawing.new("Circle")
+_G.dee.Thickness = 2
+_G.dee.NumSides = 100
+_G.dee.Radius = _G.fov_circle.Radius - 2 -- Will automatically change with main circ radius
+_G.dee.Filled = false
+_G.dee.Transparency = 1
+_G.dee.Visible = true
+_G.dee.Color = FovConfig.ColorOutline
+
+elseif 
+    FovConfig.Enabled == false then
+        --[[
+                You can change the end to destroy
+        ]]
+        _G.dee:Remove() -- or Visible = false
+        _G.outline:Remove()
+        _G.fov_circle:Remove()
+end
+
+
+
+-- Start of render loop for posistion / other shit
+RunService.RenderStepped:Connect(function(step)
+ if (_G.fov_circle ~= nil) then _G.fov_circle.Visible = _G.FovConfig.Enabled _G.fov_circle.Position = getMousePosition() + Vector2.new(0, 36) end; -- Vector = offset for circle, learn camera to edit its basically centred
+ if (_G.outline ~= nil) then _G.outline.Visible = _G.FovConfig.Enabled _G.outline.Position = getMousePosition() + Vector2.new(0, 36) end;
+ if (_G.dee ~= nil) then _G.dee.Visible = _G.FovConfig.Enabled _G.dee.Position = getMousePosition() + Vector2.new(0, 36) end;
+ if (_G.FovConfig.Rainbow) then  _G.fov_circle.Color = Color3.fromHSV(tick()%5/5,1,1) else _G.fov_circle.Color = Color3.fromRGB(255, 255, 255) end;
+ 
+ _G.outline.Radius = _G.fov_circle.Radius + 2
+_G.dee.Radius = _G.fov_circle.Radius - 2 
+_G.dee.Transparency = _G.fov_circle.Transparency
+_G.outline.Transparency = _G.fov_circle.Transparency
+_G.outline.NumSides  = _G.fov_circle.NumSides 
+_G.dee.NumSides = _G.fov_circle.NumSides 
+end)
+
+-- Start of messy shit
+
+if SelfConfig.Fov == true then
+    game.Workspace.Camera.FieldOfView = SelfConfig.FovNumber
+ end
+ 
+ if SelfConfig.Fov == false then
+    game.Workspace.Camera.FieldOfView = 70 -- Edit this to make a backup of regular fov or some shit idk
+ end
+ 
+    -- End of horrible drawing lib
