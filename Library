@@ -1,0 +1,137 @@
+--[[ Info = 
+
+         {Blue's Complete Fov Circle And Shit Library}
+         
+         You can add zindex to circle to keep it on top of uis
+         
+         Goto the end for docs 
+			
+
+]]
+
+-- I used to print info thats why its commented out and looks dumb
+
+Version = "Lua lock fov circle" -- 🎅
+
+print(Version) -- Printing whats above retard 😁
+
+_G.wait = 100 -- Was an epic variable i added (cheap toggle) but decided to be a real man and make a toggle lol (this is old asf btw i just never removed it, its a piece of histroy)
+
+
+_G.Lua_Lock_Circle = {
+    Enabled = true, -- On / off (bruh i actually had a kid dm me about this blocked kek)
+    Rainbow = false, -- Dont edit this table an execute the whole script, execute seperately or in a button etc
+    Color = Color3.fromRGB(73, 73, 255), -- Colour of main circle / when using color picker do _G.Lua_Lock_Circle.Color = colorpicker idfk i dont use ui libs
+    ColorW = Color3.fromRGB(73, 73, 255), -- ignore
+    ColorD = Color3.fromRGB(73, 73, 255), -- ignore
+    ColorOutline = Color3.fromRGB(0, 0, 0), -- Colour of the outline of circles
+}
+
+local Lua_Lock_Circle = _G.Lua_Lock_Circle;
+
+local SelfConfig = { -- Not all games will allow this and will need to be edited.
+    Fov = false, -- Self explanatory 
+    FovNumber = 120 -- Field of view size (not circle) / not inside loop so dont make a slider and dm me with 'broken' i added it for pro mod
+}
+
+
+local mouse = game.Players.LocalPlayer:GetMouse() -- Getting local mouse (needed)
+local Player = game:GetService("Players").LocalPlayer -- Getting self (local)
+local RunService = game:GetService("RunService") -- Runservice local
+
+local function getMousePosition() -- Getting mouse (leave how it is)
+    return Vector2.new(mouse.X, mouse.Y)
+end
+
+
+
+-- Outline = _G.dee and _G.outline 
+-- fov_circle = main circle
+
+   if Lua_Lock_Circle.Enabled == true then
+_G.LL_Circle = Drawing.new("Circle")
+_G.LL_Circle.Thickness = 2
+_G.LL_Circle.NumSides = 100
+_G.LL_Circle.Radius = 100
+_G.LL_Circle.Filled = false
+_G.LL_Circle.Visible = false
+_G.LL_Circle.Transparency = 1
+_G.LL_Circle.Color = Lua_Lock_Circle.Color
+_G.LL_Circle.ZIndex = 9999
+
+   
+
+--Outline Circle Below
+_G.outline = Drawing.new("Circle")
+_G.outline.Thickness = 2
+_G.outline.NumSides = 100
+-- Check render loop for radius
+_G.outline.Filled = false
+_G.outline.Transparency = _G.LL_Circle.Transparency
+_G.outline.Visible = false
+_G.outline.Color = Lua_Lock_Circle.ColorOutline
+_G.outline.ZIndex = 9999
+
+--Outline Circle Below
+_G.dee = Drawing.new("Circle")
+_G.dee.Thickness = 2
+_G.dee.NumSides = 100
+-- Check render loop for radius
+_G.dee.Filled = false
+_G.dee.Transparency = _G.LL_Circle.Transparency
+_G.dee.Visible = false
+_G.dee.Color = Lua_Lock_Circle.ColorOutline
+_G.dee.ZIndex = 9999
+
+elseif 
+    Lua_Lock_Circle.Enabled == false then
+        --[[
+                You can change the end to remove or Visible = false
+        ]]
+        _G.dee:Remove() -- or Visible = false
+        _G.outline:Remove()
+        _G.LL_Circle:Remove()
+end -- STOP
+
+
+
+
+
+
+-- Start of render loop for posistion / other shit
+
+RunService.RenderStepped:Connect(function(step)
+
+ if (_G.LL_Circle ~= nil) then LL_Circle.Visible = _G.Lua_Lock_Circle.Enabled _G.LL_Circle.Position = getMousePosition() + Vector2.new(0, 36) end; -- Vector = offset for circle, learn camera to edit its basically centred
+ if (_G.outline ~= nil) then _G.outline.Visible = _G.Lua_Lock_Circle.Enabled _G.outline.Position = getMousePosition() + Vector2.new(0, 36) end;
+ if (_G.dee ~= nil) then _G.dee.Visible = _G.Lua_Lock_Circle.Enabled _G.dee.Position = getMousePosition() + Vector2.new(0, 36) end;
+ if (_G.Lua_Lock_Circle.Rainbow) then  LL_Circle.Color = Color3.fromHSV(tick()%5/5,1,1) else LL_Circle.Color = _G.Lua_Lock_Circle.Color end;
+_G.outline.Radius = _G.LL_Circle.Radius + 2
+_G.dee.Radius = _G.LL_Circle.Radius - 2 
+_G.dee.Transparency = _G.LL_Circle.Transparency
+_G.outline.Transparency = _G.LL_Circle.Transparency
+_G.outline.NumSides  = _G.LL_Circle.NumSides 
+_G.dee.NumSides = _G.LL_Circle.NumSides 
+
+end)
+
+-- Start of messy shit / hmmm nvm not that bad just cancerous and not supported in alot of fps games but oh well here if you want it (NOT LOOPED LOL ADD IT URSELF BOZO)
+
+if SelfConfig.Fov == true then
+    game.Workspace.Camera.FieldOfView = SelfConfig.FovNumber -- Backup to the top babygirl stop reading this
+ end
+ 
+ if SelfConfig.Fov == false then
+    game.Workspace.Camera.FieldOfView = 70 -- Edit this to make a backup of regular fov or some shit idk
+ end
+ 
+    -- End of horrible drawing lib / this shit took longer than it shouldve i was just dumb and did it off memory (no bully, this was made like 2 months ago and i still use it till this day)
+    
+    -- Docs 
+    
+    --[[
+        Have to edit in a button or script tab
+        Execute _G.Lua_Lock_Circle.Color = Color3.fromRGB(73, 73, 255) will change the color
+    
+    
+    ]]
