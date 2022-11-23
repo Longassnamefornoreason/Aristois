@@ -16,8 +16,9 @@ _G.wait = 100
 
 _G.FovConfig = {
     Enabled = true, -- On / off
-    Rainbow = false, -- Buggy i recommend just using ur own rainbow inside a colour picker
-    Color = Color3.fromRGB(199, 255, 255), -- Colour of main circle
+    Rainbow = false, 
+    Color = Color3.fromRGB(73, 73, 255), -- Colour of main circle
+    ColorWorld = Color3.fromRGB(73, 73, 255), -- Custom Use
     ColorOutline = Color3.fromRGB(0, 0, 0) -- Colour of the outline of circles
 }
 
@@ -93,7 +94,7 @@ RunService.RenderStepped:Connect(function(step)
  if (_G.fov_circle ~= nil) then _G.fov_circle.Visible = _G.FovConfig.Enabled _G.fov_circle.Position = getMousePosition() + Vector2.new(0, 36) end; -- Vector = offset for circle, learn camera to edit its basically centred
  if (_G.outline ~= nil) then _G.outline.Visible = _G.FovConfig.Enabled _G.outline.Position = getMousePosition() + Vector2.new(0, 36) end;
  if (_G.dee ~= nil) then _G.dee.Visible = _G.FovConfig.Enabled _G.dee.Position = getMousePosition() + Vector2.new(0, 36) end;
- if (_G.FovConfig.Rainbow) then  _G.fov_circle.Color = Color3.fromHSV(tick()%5/5,1,1) else _G.fov_circle.Color = Color3.fromRGB(255, 255, 255) end;
+ if (_G.FovConfig.Rainbow) then  _G.fov_circle.Color = Color3.fromHSV(tick()%5/5,1,1) else _G.fov_circle.Color = FovConfig.Color end;
  
  _G.outline.Radius = _G.fov_circle.Radius + 2
 _G.dee.Radius = _G.fov_circle.Radius - 2 
