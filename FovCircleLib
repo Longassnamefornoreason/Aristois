@@ -67,7 +67,7 @@ _G.outline.Thickness = 2
 _G.outline.NumSides = 100
 -- Check render loop for radius
 _G.outline.Filled = false
-_G.outline.Transparency = LL_Circle.Transparency
+_G.outline.Transparency = _G.LL_Circle.Transparency
 _G.outline.Visible = false
 _G.outline.Color = Lua_Lock_Circle.ColorOutline
 _G.outline.ZIndex = 9999
@@ -78,7 +78,7 @@ _G.dee.Thickness = 2
 _G.dee.NumSides = 100
 -- Check render loop for radius
 _G.dee.Filled = false
-_G.dee.Transparency = LL_Circle.Transparency
+_G.dee.Transparency = _G.LL_Circle.Transparency
 _G.dee.Visible = false
 _G.dee.Color = Lua_Lock_Circle.ColorOutline
 _G.dee.ZIndex = 9999
@@ -90,7 +90,7 @@ elseif
         ]]
         _G.dee:Remove() -- or Visible = false
         _G.outline:Remove()
-        LL_Circle:Remove()
+        _G.LL_Circle:Remove()
 end -- STOP
 
 
