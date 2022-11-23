@@ -11,7 +11,7 @@
 
 -- I used to print info thats why its commented out and looks dumb
 
-Version = "Lua lock fov circle" -- 🎃
+Version = "Lua lock fov circle" -- 🎅
 
 print(Version) -- Printing whats above retard 😁
 
@@ -49,15 +49,15 @@ end
 -- fov_circle = main circle
 
    if Lua_Lock_Circle.Enabled == true then
-LL_Circle = Drawing.new("Circle")
-LL_Circle.Thickness = 2
-LL_Circle.NumSides = 100
-LL_Circle.Radius = 100
-LL_Circle.Filled = false
-LL_Circle.Visible = false
-LL_Circle.Transparency = 1
-LL_Circle.Color = Lua_Lock_Circle.Color
-LL_Circle.ZIndex = 9999
+_G.LL_Circle = Drawing.new("Circle")
+_G.LL_Circle.Thickness = 2
+_G.LL_Circle.NumSides = 100
+_G.LL_Circle.Radius = 100
+_G.LL_Circle.Filled = false
+_G.LL_Circle.Visible = false
+_G.LL_Circle.Transparency = 1
+_G.LL_Circle.Color = Lua_Lock_Circle.Color
+_G.LL_Circle.ZIndex = 9999
 
    
 
@@ -102,16 +102,16 @@ end -- STOP
 
 RunService.RenderStepped:Connect(function(step)
 
- if (LL_Circle ~= nil) then LL_Circle.Visible = _G.Lua_Lock_Circle.Enabled LL_Circle.Position = getMousePosition() + Vector2.new(0, 36) end; -- Vector = offset for circle, learn camera to edit its basically centred
+ if (_G.LL_Circle ~= nil) then LL_Circle.Visible = _G.Lua_Lock_Circle.Enabled _G.LL_Circle.Position = getMousePosition() + Vector2.new(0, 36) end; -- Vector = offset for circle, learn camera to edit its basically centred
  if (_G.outline ~= nil) then _G.outline.Visible = _G.Lua_Lock_Circle.Enabled _G.outline.Position = getMousePosition() + Vector2.new(0, 36) end;
  if (_G.dee ~= nil) then _G.dee.Visible = _G.Lua_Lock_Circle.Enabled _G.dee.Position = getMousePosition() + Vector2.new(0, 36) end;
  if (_G.Lua_Lock_Circle.Rainbow) then  LL_Circle.Color = Color3.fromHSV(tick()%5/5,1,1) else LL_Circle.Color = _G.Lua_Lock_Circle.Color end;
-_G.outline.Radius = LL_Circle.Radius + 2
-_G.dee.Radius = LL_Circle.Radius - 2 
-_G.dee.Transparency = LL_Circle.Transparency
-_G.outline.Transparency = LL_Circle.Transparency
-_G.outline.NumSides  = LL_Circle.NumSides 
-_G.dee.NumSides = LL_Circle.NumSides 
+_G.outline.Radius = _G.LL_Circle.Radius + 2
+_G.dee.Radius = _G.LL_Circle.Radius - 2 
+_G.dee.Transparency = _G.LL_Circle.Transparency
+_G.outline.Transparency = _G.LL_Circle.Transparency
+_G.outline.NumSides  = _G.LL_Circle.NumSides 
+_G.dee.NumSides = _G.LL_Circle.NumSides 
 
 end)
 
